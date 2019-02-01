@@ -106,3 +106,6 @@ pri_domain_name: 'example.org'
 
 openjdk_version: 8
 logstash_install_java: true
+
+# Defines the system groups the logstash user should be part of
+logstash_system_groups: []
