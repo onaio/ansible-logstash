@@ -28,7 +28,7 @@
 - name: config_logstash | configuring logstash
   template:
     src: "etc/logstash/conf.d/{{ item }}.conf.j2"
-    dest: "{{ logstash_config_dir }}/{{ item }}.conf"
+    dest: "{{ logstash_config_dir }}/{{ item }}{% if logstash_input_config_suffix|length and item == '000_inputs' %}-{{ logstash_input_config_suffix }}{% endif %}.conf"
     owner: "logstash"
     group: "logstash"
     mode: 0644

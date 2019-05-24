@@ -17,6 +17,9 @@ logstash_base_configs:
 #  - '002_metrics'
   - '999_outputs'
 
+# The suffix to append to input configuration files in logstash_config_dir
+logstash_input_config_suffix: ""
+
 logstash_base_file_inputs: []
   # - path: '/var/log/nginx/access.log'
   #   type: 'nginx-access'
