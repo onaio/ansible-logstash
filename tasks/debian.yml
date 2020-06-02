@@ -37,7 +37,7 @@
   become: true
   register: result
   until: result is successful
-  when: logstash_install_java
+  when: logstash_install_java|bool
 
 - name: debian | assigning Pin priority 1001 on APT Preferences
   template:

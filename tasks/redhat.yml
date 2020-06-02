@@ -22,7 +22,7 @@
   until: result is successful
   when: >
     ansible_distribution != "Fedora" and
-    logstash_install_java
+    logstash_install_java|bool
 
 - name: redhat | installing logstash
   yum:
