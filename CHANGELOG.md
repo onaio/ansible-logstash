@@ -1,3 +1,73 @@
+commit 5afa3dcedaf5f96a0fa68d22d9edf0864252df3b
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Wed Aug 26 23:40:00 2020 -0400
+
+    Updated CI tests
+
+commit 2bf070421b853d706858a9d56b611060d1cdc4c2
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Wed Aug 26 23:38:50 2020 -0400
+
+    Updated Python requirements
+
+commit 4121eca20078829a822011d3a3014af2eb51595b
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Wed Aug 26 23:38:12 2020 -0400
+
+    Updated Molecule tests
+
+commit e6046f4943d60686c2ee4ecff54583a625a133c4
+Author: Evans Murithi <murithievans80@gmail.com>
+Date:   Wed Aug 26 16:39:26 2020 +0300
+
+    Use '~' instead of '+' for string concatenation
+    
+    Use `~` during string concatenation as it converts all operands into
+    strings first. `+` operator is not preferred for string concatenation.
+    https://jinja.palletsprojects.com/en/2.11.x/templates/#other-operators
+    
+    Fixes mrlesmithjr#25
+
+commit f25b7d77cf14079d3a9da1fc3a06380dc2588601
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Fri Jun 19 09:43:44 2020 -0400
+
+    Fixing BS GPG Key Issue
+    
+    https://discuss.elastic.co/t/official-apt-repository-451-unavailable-for-legal-reasons/232494
+
+commit 9149132bdf5fb7374e5a0eb9bbf93cf2e573fa76
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Jun 18 20:36:31 2020 -0400
+
+    Updated to version 7.8.0
+    
+    Also updated validation that host meets memory requirements. Now using
+    assertion.
+
+commit 91fd66a93a0a5796a89153d75a296a33000c83bd
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Jun 18 19:58:35 2020 -0400
+
+    Added gnupg Debian pre-req
+    
+    Debian based systems require gpg command to add Elastic repo
+
+commit cefedeb9eb883b2987c803e47feb749d988b8502
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Jun 18 19:55:55 2020 -0400
+
+    Updated Python Reqs
+    
+    Also had to update CI tests to account for new Python reqs and
+    processes. Ubuntu 20.04 Molecule test added as well.
+
+commit b204d8933ad653c0ac75ca7c935da94dddda28da
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Sun Apr 5 23:25:03 2020 -0400
+
+    Fixing Debian10 OpenJDK version
+
 commit 7eaa9c25761a0dc67cb83a58307f8622536a3422
 Author: Larry Smith Jr <mrlesmithjr@gmail.com>
 Date:   Sun Apr 5 23:14:53 2020 -0400
