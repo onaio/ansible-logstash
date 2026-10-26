@@ -9,15 +9,13 @@
   register: result
   until: result is successful
 
-- name: debian | Copying Elasticsearch GPG Key
+- name: debian | Adding Elasticsearch GPG Key
   copy:
     src: GPG-KEY-elasticsearch
-    dest: /tmp/GPG-KEY-elasticsearch
-
-- name: debian | Adding Elasticsearch GPG Key
-  apt_key:
-    file: /tmp/GPG-KEY-elasticsearch
-    state: present
+    dest: /etc/apt/trusted.gpg.d/elasticsearch.asc
+    owner: root
+    group: root
+    mode: "0644"
   become: true
 
 - name: debian | adding logstash repo
