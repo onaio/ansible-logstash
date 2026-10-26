@@ -4,4 +4,4 @@
   tasks:
     - name: Include ansible-logstash
       include_role:
-        name: ansible-logstash
+        name: "{{ lookup('env', 'MOLECULE_PROJECT_DIRECTORY') }}"

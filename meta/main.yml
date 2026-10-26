@@ -1,5 +1,7 @@
 ---
 galaxy_info:
+  role_name: logstash
+  namespace: onaio
   author: Larry Smith Jr.
   description: Ansible role to install/configure Logstash
   license: MIT
