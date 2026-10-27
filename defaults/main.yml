@@ -17,20 +17,18 @@ logstash_base_configs:
   #  - 002_metrics
   - 999_outputs
 
-logstash_base_file_inputs:
-  []
-  # - path: /var/log/nginx/access.log
-  #   type: nginx-access
-  # - path: /var/log/nginx/error.log
-  #   type: nginx-error
-  # - path: /var/log/mail.log
-  #   type: postfix-log
-  # - path: /var/log/redis/redis-server.log
-  #   type: redis-server
+logstash_base_file_inputs: []
+# - path: /var/log/nginx/access.log
+#   type: nginx-access
+# - path: /var/log/nginx/error.log
+#   type: nginx-error
+# - path: /var/log/mail.log
+#   type: postfix-log
+# - path: /var/log/redis/redis-server.log
+#   type: redis-server
 
 # Define inputs below to configure
-logstash_base_inputs:
-  []
+logstash_base_inputs: []
   # - prot: tcp
   #   # Gets around port < 1024 (Note...Configure clients to send
   #   # to 10514 instead of default 514)
@@ -51,24 +49,20 @@ logstash_base_inputs:
   #   # reminder....ports < 1024 require root access..
   #   port: 514
 
-logstash_custom_inputs:
-  []
+logstash_custom_inputs: []
   # - input: someinput
   #   lines:
   #     - 'somekey => "value"'
 
-logstash_custom_filters:
-  []
+logstash_custom_filters: []
   # - lines:
   #     - 'somekey => "value"'
 
-logstash_base_outputs:
-  []
+logstash_base_outputs: []
   # - output: redis
   #   output_host: "{{ logstash_server_fqdn }}"
 
-logstash_custom_outputs:
-  []
+logstash_custom_outputs: []
   # - output: someoutput
   #   lines:
   #     - 'somekey => "value"'
@@ -86,34 +80,36 @@ logstash_min_memory_required: 1024
 # Define minor version to install also defines Pin priority on APT Preferences.d
 logstash_minor_ver: 1:7.17.12-1
 
-logstash_plugins:
-  []
-  # - name: logstash-codec-nmap
-  #   state: absent
-  # - name: logstash-filter-elasticsearch
-  #   state: present
-  # - name: logstash-filter-json_encode
-  #   state: present
-  # - name: logstash-filter-multiline
-  #   state: absent
-  # - name: logstash-filter-translate
-  #   state: present
-  # - name: logstash-filter-zeromq
-  #   state: absent
-  # - name: logstash-input-beats
-  #   state: present
-  # - name: logstash-output-email
-  #   state: present
-  # - name: logstash-output-jira
-  #   state: absent
-  # - name: logstash-output-slack
-  #   state: absent
+logstash_plugins: []
+# - name: logstash-codec-nmap
+#   state: absent
+# - name: logstash-filter-elasticsearch
+#   state: present
+# - name: logstash-filter-json_encode
+#   state: present
+# - name: logstash-filter-multiline
+#   state: absent
+# - name: logstash-filter-translate
+#   state: present
+# - name: logstash-filter-zeromq
+#   state: absent
+# - name: logstash-input-beats
+#   state: present
+# - name: logstash-output-email
+#   state: present
+# - name: logstash-output-jira
+#   state: absent
+# - name: logstash-output-slack
+#   state: absent
 
 # https://github.com/elastic/logstash/issues/6528
 logstash_plugin_cmd_vars: "JARS_SKIP='true'"
 # Other examples:
 # Options to work with proxy
-# logstash_plugin_cmd_vars: "JARS_SKIP='true' JRUBY_OPTS='-J-Dhttps.proxyHost=user:password@proxy.com -J-Dhttps.proxyPort=8080 -J-Dhttp.proxyHost=user:password@proxy.com -J-Dhttp.proxyPort=8080'"
+# logstash_plugin_cmd_vars: >-
+#   JARS_SKIP='true' JRUBY_OPTS='-J-Dhttps.proxyHost=user:password@proxy.com -J-Dhttps.proxyPort=8080
+#   -J-Dhttp.proxyHost=user:password@proxy.com -J-Dhttp.proxyPort=8080'
+
 
 logstash_redhat_repo_url: "{{ 'https://artifacts.elastic.co/packages/' ~ logstash_major_ver ~ '/yum' }}"
 

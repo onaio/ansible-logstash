@@ -1,32 +1,38 @@
 ---
 # tasks file for ansible-logstash
 - name: Checking To Ensure Node Meets Minimum Specs
-  assert:
+  ansible.builtin.assert:
     that:
       - ansible_memtotal_mb > logstash_min_memory_required
     fail_msg: "{{ ansible_memtotal_mb }} < {{ logstash_min_memory_required }}"
 
-- include_tasks: set_facts.yml
+- name: Set Logstash facts
+  ansible.builtin.include_tasks: set_facts.yml
 
-- include_tasks: debian.yml
+- name: Install Logstash on Debian
+  ansible.builtin.include_tasks: debian.yml
   tags:
     - logstash
   when: ansible_os_family == "Debian"
 
-- include_tasks: redhat.yml
+- name: Install Logstash on RedHat
+  ansible.builtin.include_tasks: redhat.yml
   tags:
     - logstash
   when: ansible_os_family == "RedHat"
 
-- include_tasks: plugins.yml
+- name: Install Logstash plugins
+  ansible.builtin.include_tasks: plugins.yml
   tags:
     - logstash
     - logstash_plugins
 
-- include_tasks: config_logstash.yml
+- name: Configure Logstash
+  ansible.builtin.include_tasks: config_logstash.yml
   when: config_logstash
 
-- include_tasks: validate_permissions.yml
+- name: Validate Logstash permissions
+  ansible.builtin.include_tasks: validate_permissions.yml
   tags:
     - config_logstash
     - logstash

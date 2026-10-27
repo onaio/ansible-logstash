@@ -1,18 +1,18 @@
 ---
 - name: set_facts | Setting Logstash Facts
-  set_fact:
+  ansible.builtin.set_fact:
     logstash_plugin_bin: /opt/logstash/bin/plugin
     logstash_bin: /opt/logstash/bin/logstash
   when: logstash_major_ver == "2.x"
 
 - name: set_facts | Setting Logstash Facts
-  set_fact:
+  ansible.builtin.set_fact:
     logstash_plugin_bin: /usr/share/logstash/bin/logstash-plugin
     logstash_bin: /usr/share/logstash/bin/logstash
   when: logstash_major_ver == "5.x"
 
 - name: set_facts | Setting Logstash OpenJDK Version
-  set_fact:
+  ansible.builtin.set_fact:
     logstash_openjdk_version: "7"
   when: >
     (ansible_distribution == "Debian" and
@@ -21,7 +21,7 @@
     ansible_distribution_version is version('14', '<='))
 
 - name: set_facts | Setting Logstash OpenJDK Version
-  set_fact:
+  ansible.builtin.set_fact:
     logstash_openjdk_version: "8"
   when: >
     (ansible_distribution == "Debian" and
@@ -32,7 +32,7 @@
     ansible_os_family == "RedHat"
 
 - name: set_facts | Setting Logstash OpenJDK Version
-  set_fact:
+  ansible.builtin.set_fact:
     logstash_openjdk_version: "11"
   when:
     - ansible_distribution == "Debian"
