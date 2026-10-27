@@ -1,6 +1,6 @@
 ---
 - name: plugins | Managing Logstash Plugins
-  logstash_plugin:
+  community.general.logstash_plugin:
     name: "{{ item['name'] }}"
     state: "{{ item['state'] }}"
   become: true
