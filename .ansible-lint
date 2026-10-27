@@ -1,0 +1,13 @@
+---
+profile: production
+exclude_paths:
+  - .github/
+  - molecule/centos7/
+  - molecule/centos8/
+  - molecule/debian10/
+  - molecule/debian8/
+  - molecule/debian9/
+  - molecule/fedora/
+  - molecule/ubuntu1604/
+  - molecule/ubuntu1804/
+  - molecule/ubuntu2004/

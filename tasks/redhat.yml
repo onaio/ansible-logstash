@@ -1,23 +1,25 @@
 ---
 - name: redhat | Copying Elasticsearch GPG Key
-  copy:
+  ansible.builtin.copy:
     src: GPG-KEY-elasticsearch
     dest: /tmp/GPG-KEY-elasticsearch
+    mode: "0644"
 
 - name: redhat | Adding Elasticsearch GPG Key
-  rpm_key:
+  ansible.builtin.rpm_key:
     key: /tmp/GPG-KEY-elasticsearch
     state: present
   become: true
 
-- name: redhat | enabling logstash repository
-  template:
+- name: redhat | Enabling logstash repository
+  ansible.builtin.template:
     src: logstash_repo.j2
     dest: /etc/yum.repos.d/logstash.repo
+    mode: "0644"
   become: true
 
-- name: redhat | installing java
-  yum:
+- name: redhat | Installing java
+  ansible.builtin.dnf:
     name: ["{{ 'java-1.' ~ logstash_openjdk_version ~ '.0-openjdk' }}"]
     state: present
   become: true
@@ -27,8 +29,8 @@
     ansible_distribution != "Fedora" and
     logstash_install_java
 
-- name: redhat | installing logstash
-  yum:
+- name: redhat | Installing logstash
+  ansible.builtin.dnf:
     name: ["logstash"]
     state: present
   become: true
@@ -36,8 +38,8 @@
   until: result is successful
   when: ansible_distribution != "Fedora"
 
-- name: redhat | installing logstash
-  dnf:
+- name: redhat | Installing logstash
+  ansible.builtin.dnf:
     name: ["java", "logstash"]
     state: present
   become: true
@@ -45,8 +47,8 @@
   until: result is successful
   when: ansible_distribution == "Fedora"
 
-- name: redhat | ensuring logstash is started and enabled on boot
-  service:
+- name: redhat | Ensuring logstash is started and enabled on boot
+  ansible.builtin.service:
     name: logstash
     state: started
     enabled: true

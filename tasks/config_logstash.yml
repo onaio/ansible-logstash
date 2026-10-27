@@ -1,6 +1,6 @@
 ---
-- name: config_logstash | clearing existing logstash config
-  file:
+- name: config_logstash | Clearing existing logstash config
+  ansible.builtin.file:
     path: "{{ logstash_config_dir }}"
     state: absent
   become: true
@@ -8,8 +8,8 @@
     clear_logstash_config is defined and
     clear_logstash_config
 
-- name: config_logstash | setup logstash config directory and set permissions
-  file:
+- name: config_logstash | Setup logstash config directory and set permissions
+  ansible.builtin.file:
     path: "{{ logstash_config_dir }}"
     state: directory
     owner: "{{ logstash_system_user }}"
@@ -17,47 +17,47 @@
     mode: u=rwx,g=rx,o=rx
   become: true
 
-- name: config_logstash | removing original logstash config if it exists
-  file:
+- name: config_logstash | Removing original logstash config if it exists
+  ansible.builtin.file:
     path: "{{ logstash_config_dir ~ '/logstash.conf' }}"
     state: absent
   become: true
-  notify: restart logstash
+  notify: Restart logstash
 
-- name: config_logstash | configuring logstash
-  template:
+- name: config_logstash | Configuring logstash
+  ansible.builtin.template:
     src: "{{ 'etc/logstash/conf.d/' ~ item ~ '.conf.j2' }}"
     dest: "{{ logstash_config_dir ~ '/' ~ item ~ '.conf' }}"
     owner: "{{ logstash_system_user }}"
     group: "{{ logstash_system_group }}"
     mode: u=rw,g=r,o=r
-    #validate: "/opt/logstash/bin/logstash -tf %s" # commented due to error during tests with file not found.
+    # validate: "/opt/logstash/bin/logstash -tf %s" # commented due to error during tests with file not found.
   become: true
-  notify: restart logstash
+  notify: Restart logstash
   register: _logstash_config
   with_items: "{{ logstash_base_configs }}"
 
-- name: config_logstash | creating logstash pattern folders
-  file:
+- name: config_logstash | Creating logstash pattern folders
+  ansible.builtin.file:
     path: "{{ item }}"
     state: directory
     owner: "{{ logstash_system_user }}"
     group: "{{ logstash_system_group }}"
-    mode: 0775
+    mode: "0775"
     recurse: true
   become: true
   with_items:
     - /opt/logstash/lib/logstash/outputs/elasticsearch
     - /opt/logstash/patterns
 
-- name: config_logstash | add the logstash user to system groups
-  user:
+- name: config_logstash | Add the logstash user to system groups
+  ansible.builtin.user:
     name: "{{ logstash_system_user }}"
     groups: "{{ logstash_system_groups | join(',') }}"
-    append: no
+    append: false
 
-- name: config_logstash | test logstash configuration # noqa 305 503
-  shell: "{{ logstash_bin }} -t -f {{ logstash_config_dir }} --path.settings /etc/logstash/"
+- name: config_logstash | Test logstash configuration # noqa: command-instead-of-shell no-handler
+  ansible.builtin.shell: "{{ logstash_bin }} -t -f {{ logstash_config_dir }} --path.settings /etc/logstash/"
   become: true
   changed_when: false
   when: >

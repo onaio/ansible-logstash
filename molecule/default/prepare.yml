@@ -1,0 +1,16 @@
+---
+- name: Prepare
+  hosts: all
+  become: true
+  tasks:
+    # Minimal images drop man pages, and the OpenJDK package fails without this directory
+    - name: Create the man1 directory
+      ansible.builtin.file:
+        path: /usr/share/man/man1
+        state: directory
+        mode: "0755"
+
+    - name: Update apt cache
+      ansible.builtin.apt:
+        update_cache: true
+      changed_when: false
